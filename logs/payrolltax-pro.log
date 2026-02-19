@@ -1,0 +1,156 @@
+2026-02-19 11:49:11 [restartedMain] INFO  c.p.PayrollTaxProApplication - Starting PayrollTaxProApplication using Java 21.0.10 with PID 73485 (/Users/admin/Documents/seno/PayrollTax Pro API/PayrollTax Pro API/target/classes started by admin in /Users/admin/Documents/seno/PayrollTax Pro API/PayrollTax Pro API)
+2026-02-19 11:49:11 [restartedMain] DEBUG c.p.PayrollTaxProApplication - Running with Spring Boot v4.0.2, Spring v7.0.3
+2026-02-19 11:49:11 [restartedMain] INFO  c.p.PayrollTaxProApplication - No active profile set, falling back to 1 default profile: "default"
+2026-02-19 11:49:11 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-02-19 11:49:11 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-02-19 11:49:11 [restartedMain] INFO  o.s.b.d.c.l.DockerComposeLifecycleManager - Using Docker Compose file /Users/admin/Documents/seno/PayrollTax Pro API/PayrollTax Pro API/compose.yaml
+2026-02-19 11:49:12 [OutputReader-stderr] INFO  o.s.b.docker.compose.core.DockerCli -  Image payrolltaxproapi-backend Building 
+2026-02-19 11:49:12 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #1 [internal] load local bake definitions
+2026-02-19 11:49:13 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #1 reading from stdin 604B done
+2026-02-19 11:49:13 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #1 DONE 0.0s
+2026-02-19 11:49:13 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - 
+2026-02-19 11:49:13 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #2 [internal] load build definition from Dockerfile
+2026-02-19 11:49:13 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #2 transferring dockerfile: 911B done
+2026-02-19 11:49:13 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #2 DONE 0.0s
+2026-02-19 11:49:13 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - 
+2026-02-19 11:49:13 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #3 [auth] library/eclipse-temurin:pull token for registry-1.docker.io
+2026-02-19 11:49:13 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #3 DONE 0.0s
+2026-02-19 11:49:13 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - 
+2026-02-19 11:49:13 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #4 [internal] load metadata for docker.io/library/maven:3.9-eclipse-temurin-21
+2026-02-19 11:49:13 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #4 DONE 0.1s
+2026-02-19 11:49:13 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - 
+2026-02-19 11:49:13 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #5 [internal] load metadata for docker.io/library/eclipse-temurin:21-jre-alpine
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #5 DONE 2.0s
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - 
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #6 [internal] load .dockerignore
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #6 transferring context: 2B done
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #6 DONE 0.0s
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - 
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #7 [build 1/5] FROM docker.io/library/maven:3.9-eclipse-temurin-21@sha256:c3c9d3ac4ce8431a3995c0318b8d390f448e693dd4fabc16e9b68d2e1f3d7b46
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #7 resolve docker.io/library/maven:3.9-eclipse-temurin-21@sha256:c3c9d3ac4ce8431a3995c0318b8d390f448e693dd4fabc16e9b68d2e1f3d7b46 done
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #7 DONE 0.0s
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - 
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #8 [stage-1 1/5] FROM docker.io/library/eclipse-temurin:21-jre-alpine@sha256:6ad8ed080d9be96b61438ec3ce99388e294af216ed57356000c06070e85c5d5d
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #8 resolve docker.io/library/eclipse-temurin:21-jre-alpine@sha256:6ad8ed080d9be96b61438ec3ce99388e294af216ed57356000c06070e85c5d5d 0.0s done
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #8 DONE 0.0s
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - 
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #9 [stage-1 2/5] WORKDIR /app
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #9 CACHED
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - 
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #10 [stage-1 3/5] RUN apk add --no-cache curl
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #10 CACHED
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - 
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #11 [internal] load build context
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #11 transferring context: 19.73kB 0.0s done
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #11 DONE 0.0s
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - 
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #12 [build 2/5] WORKDIR /app
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #12 CACHED
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - 
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #13 [build 3/5] COPY pom.xml .
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #13 CACHED
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - 
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #14 [build 4/5] COPY src ./src
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #14 DONE 0.0s
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - 
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #15 [build 5/5] RUN mvn clean package -DskipTests -B --no-transfer-progress
+2026-02-19 11:49:15 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #15 0.703 [INFO] Scanning for projects...
+2026-02-19 11:49:22 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #15 7.631 [INFO] 
+2026-02-19 11:49:22 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #15 7.631 [INFO] --------------------< com.example:PayrollTaxProAPI >--------------------
+2026-02-19 11:49:22 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #15 7.631 [INFO] Building PayrollTax Pro API 0.0.1-SNAPSHOT
+2026-02-19 11:49:22 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #15 7.631 [INFO]   from pom.xml
+2026-02-19 11:49:22 [OutputReader-stdout] INFO  o.s.b.docker.compose.core.DockerCli - #15 7.631 [INFO] --------------------------------[ jar ]---------------------------------
+2026-02-19 11:50:25 [OutputReader-stderr] INFO  o.s.b.docker.compose.core.DockerCli - failed to receive status: rpc error: code = Unavailable desc = error reading from server: EOF
+2026-02-19 11:50:25 [OutputReader-stderr] INFO  o.s.b.docker.compose.core.DockerCli - 
+2026-02-19 11:50:25 [restartedMain] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.boot.docker.compose.core.ProcessExitException: 'docker compose --file /Users/admin/Documents/seno/PayrollTax Pro API/PayrollTax Pro API/compose.yaml --ansi never up --no-color --detach --wait' failed with exit code 1.
+
+Stdout:
+#1 [internal] load local bake definitions
+#1 reading from stdin 604B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 911B done
+#2 DONE 0.0s
+
+#3 [auth] library/eclipse-temurin:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#4 [internal] load metadata for docker.io/library/maven:3.9-eclipse-temurin-21
+#4 DONE 0.1s
+
+#5 [internal] load metadata for docker.io/library/eclipse-temurin:21-jre-alpine
+#5 DONE 2.0s
+
+#6 [internal] load .dockerignore
+#6 transferring context: 2B done
+#6 DONE 0.0s
+
+#7 [build 1/5] FROM docker.io/library/maven:3.9-eclipse-temurin-21@sha256:c3c9d3ac4ce8431a3995c0318b8d390f448e693dd4fabc16e9b68d2e1f3d7b46
+#7 resolve docker.io/library/maven:3.9-eclipse-temurin-21@sha256:c3c9d3ac4ce8431a3995c0318b8d390f448e693dd4fabc16e9b68d2e1f3d7b46 done
+#7 DONE 0.0s
+
+#8 [stage-1 1/5] FROM docker.io/library/eclipse-temurin:21-jre-alpine@sha256:6ad8ed080d9be96b61438ec3ce99388e294af216ed57356000c06070e85c5d5d
+#8 resolve docker.io/library/eclipse-temurin:21-jre-alpine@sha256:6ad8ed080d9be96b61438ec3ce99388e294af216ed57356000c06070e85c5d5d 0.0s done
+#8 DONE 0.0s
+
+#9 [stage-1 2/5] WORKDIR /app
+#9 CACHED
+
+#10 [stage-1 3/5] RUN apk add --no-cache curl
+#10 CACHED
+
+#11 [internal] load build context
+#11 transferring context: 19.73kB 0.0s done
+#11 DONE 0.0s
+
+#12 [build 2/5] WORKDIR /app
+#12 CACHED
+
+#13 [build 3/5] COPY pom.xml .
+#13 CACHED
+
+#14 [build 4/5] COPY src ./src
+#14 DONE 0.0s
+
+#15 [build 5/5] RUN mvn clean package -DskipTests -B --no-transfer-progress
+#15 0.703 [INFO] Scanning for projects...
+#15 7.631 [INFO] 
+#15 7.631 [INFO] --------------------< com.example:PayrollTaxProAPI >--------------------
+#15 7.631 [INFO] Building PayrollTax Pro API 0.0.1-SNAPSHOT
+#15 7.631 [INFO]   from pom.xml
+#15 7.631 [INFO] --------------------------------[ jar ]---------------------------------
+
+
+Stderr:
+ Image payrolltaxproapi-backend Building 
+failed to receive status: rpc error: code = Unavailable desc = error reading from server: EOF
+
+
+	at org.springframework.boot.docker.compose.core.ProcessRunner.run(ProcessRunner.java:98)
+	at org.springframework.boot.docker.compose.core.DockerCli.run(DockerCli.java:82)
+	at org.springframework.boot.docker.compose.core.DefaultDockerCompose.up(DefaultDockerCompose.java:58)
+	at org.springframework.boot.docker.compose.lifecycle.StartCommand.applyTo(StartCommand.java:51)
+	at org.springframework.boot.docker.compose.lifecycle.DockerComposeLifecycleManager.start(DockerComposeLifecycleManager.java:131)
+	at org.springframework.boot.docker.compose.lifecycle.DockerComposeListener.onApplicationEvent(DockerComposeListener.java:53)
+	at org.springframework.boot.docker.compose.lifecycle.DockerComposeListener.onApplicationEvent(DockerComposeListener.java:35)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:180)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:173)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:151)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:133)
+	at org.springframework.boot.context.event.EventPublishingRunListener.multicastInitialEvent(EventPublishingRunListener.java:137)
+	at org.springframework.boot.context.event.EventPublishingRunListener.contextLoaded(EventPublishingRunListener.java:99)
+	at org.springframework.boot.SpringApplicationRunListeners.lambda$contextLoaded$0(SpringApplicationRunListeners.java:74)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:123)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:117)
+	at org.springframework.boot.SpringApplicationRunListeners.contextLoaded(SpringApplicationRunListeners.java:74)
+	at org.springframework.boot.SpringApplication.prepareContext(SpringApplication.java:418)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:320)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at com.payrolltaxpro.PayrollTaxProApplication.main(PayrollTaxProApplication.java:18)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:52)

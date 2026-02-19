@@ -1,0 +1,985 @@
+{
+  "info": {
+    "name": "PayrollTax Pro API",
+    "description": "Multi-Company SaaS Payroll Engine - Complete API Collection for testing payroll management, tax calculation, BPJS simulation, and more.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8081",
+      "type": "string"
+    },
+    {
+      "key": "apiPath",
+      "value": "api",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "tenantId",
+      "value": "1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "01. Authentication",
+      "item": [
+        {
+          "name": "Login - Admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "pm.collectionVariables.set(\"token\", jsonData.data.accessToken);",
+                  "pm.collectionVariables.set(\"userId\", jsonData.data.userId);",
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Response has accessToken\", function () {",
+                  "    pm.expect(jsonData.data.accessToken).to.exist;",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"admin123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "auth", "login"]
+            },
+            "description": "Login with admin credentials. Default: admin / admin123"
+          },
+          "response": []
+        },
+        {
+          "name": "Login - PT Maju Jaya Manager",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "pm.collectionVariables.set(\"token\", jsonData.data.accessToken);",
+                  "pm.collectionVariables.set(\"userId\", jsonData.data.userId);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"budi.maju\",\n  \"password\": \"admin123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "auth", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/auth/logout",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "auth", "logout"]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Authentication endpoints for login/logout"
+    },
+    {
+      "name": "02. Tenants",
+      "item": [
+        {
+          "name": "Get All Tenants",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/tenants",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "tenants"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Tenant by ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/tenants/:tenantId",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "tenants", ":tenantId"],
+              "variable": [
+                {
+                  "key": "tenantId",
+                  "value": "{{tenantId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Tenant",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"PT Baru Sejahtera\",\n  \"schemaName\": \"tenant_pt_baru\",\n  \"active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/tenants",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "tenants"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Tenant",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"PT Maju Jaya Sejahtera Updated\",\n  \"schemaName\": \"tenant_pt_maju_jaya\",\n  \"active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/tenants/:tenantId",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "tenants", ":tenantId"],
+              "variable": [
+                {
+                  "key": "tenantId",
+                  "value": "{{tenantId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Tenant management endpoints"
+    },
+    {
+      "name": "03. Employees",
+      "item": [
+        {
+          "name": "Get All Employees",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/employees",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "employees"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Employees Page",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/employees/page?page=0&size=10&sortBy=name",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "employees", "page"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "name"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Employee by ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/employees/:employeeId",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "employees", ":employeeId"],
+              "variable": [
+                {
+                  "key": "employeeId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Employees by Tenant",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/employees/tenant/:tenantId",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "employees", "tenant", ":tenantId"],
+              "variable": [
+                {
+                  "key": "tenantId",
+                  "value": "{{tenantId}}"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search Employees",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/employees/search?tenantId=:tenantId&name=Ahmad",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "employees", "search"],
+              "query": [
+                {
+                  "key": "tenantId",
+                  "value": "{{tenantId}}"
+                },
+                {
+                  "key": "name",
+                  "value": "Ahmad"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Employee",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenantId\": 1,\n  \"employeeCode\": \"EMP-2024-999\",\n  \"name\": \"Test Employee\",\n  \"npwp\": \"1234567890123456\",\n  \"taxStatus\": \"TK0\",\n  \"salaryStructureId\": 5,\n  \"bankName\": \"BCA\",\n  \"bankAccount\": \"9999999999\",\n  \"joinDate\": \"2024-01-01\",\n  \"bpjsNumber\": \"0009999999999\",\n  \"active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/employees",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "employees"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Employee",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tenantId\": 1,\n  \"employeeCode\": \"EMP-2024-001\",\n  \"name\": \"Ahmad Fauzi Updated\",\n  \"npwp\": \"1234567890123456\",\n  \"taxStatus\": \"TK1\",\n  \"salaryStructureId\": 6,\n  \"bankName\": \"BCA\",\n  \"bankAccount\": \"1234567890\",\n  \"joinDate\": \"2020-01-15\",\n  \"bpjsNumber\": \"0001234567890\",\n  \"active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/employees/:employeeId",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "employees", ":employeeId"],
+              "variable": [
+                {
+                  "key": "employeeId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Employee management endpoints"
+    },
+    {
+      "name": "04. Salary Structures",
+      "item": [
+        {
+          "name": "Get All Salary Structures",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/salary-structures",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "salary-structures"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Active Salary Structures",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/salary-structures/active",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "salary-structures", "active"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Salary Structure",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Senior Engineer\",\n  \"grade\": \"SENIOR-ENG\",\n  \"basicSalary\": 18000000,\n  \"allowance\": 3000000,\n  \"deduction\": 0,\n  \"active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/salary-structures",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "salary-structures"]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Salary structure management"
+    },
+    {
+      "name": "05. Tax Brackets",
+      "item": [
+        {
+          "name": "Get All Tax Brackets",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/tax-brackets",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "tax-brackets"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Active Tax Brackets",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/tax-brackets/active",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "tax-brackets", "active"]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Tax bracket configuration (Indonesia progressive tax)"
+    },
+    {
+      "name": "06. Payroll Processing",
+      "item": [
+        {
+          "name": "Process Payroll",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Payroll processed successfully\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"month\": 1,\n  \"year\": 2024,\n  \"employeeIds\": [1, 2, 3, 4, 5],\n  \"defaultOvertimeHours\": 10\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/payroll/process",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "payroll", "process"]
+            },
+            "description": "Process payroll for multiple employees"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Payroll Summary",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/payroll/summary?tenantId=:tenantId&month=1&year=2024",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "payroll", "summary"],
+              "query": [
+                {
+                  "key": "tenantId",
+                  "value": "{{tenantId}}"
+                },
+                {
+                  "key": "month",
+                  "value": "1"
+                },
+                {
+                  "key": "year",
+                  "value": "2024"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Approve Payroll",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"payrollId\": 1,\n  \"action\": \"APPROVE\",\n  \"notes\": \"Approved for payment\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/payroll/:payrollId/approve",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "payroll", ":payrollId", "approve"],
+              "variable": [
+                {
+                  "key": "payrollId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reject Payroll",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"payrollId\": 1,\n  \"action\": \"REJECT\",\n  \"notes\": \"Incorrect calculation\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/payroll/:payrollId/reject",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "payroll", ":payrollId", "reject"],
+              "variable": [
+                {
+                  "key": "payrollId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Lock Payroll for Month",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/payroll/lock?tenantId=:tenantId&month=1&year=2024",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "payroll", "lock"],
+              "query": [
+                {
+                  "key": "tenantId",
+                  "value": "{{tenantId}}"
+                },
+                {
+                  "key": "month",
+                  "value": "1"
+                },
+                {
+                  "key": "year",
+                  "value": "2024"
+                }
+              ]
+            },
+            "description": "Lock all payrolls for a specific month/year"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Payroll by Employee",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/payroll/employee/:employeeId?month=1&year=2024",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "payroll", "employee", ":employeeId"],
+              "query": [
+                {
+                  "key": "month",
+                  "value": "1"
+                },
+                {
+                  "key": "year",
+                  "value": "2024"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "employeeId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Payslip PDF",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/payroll/:payrollId/payslip",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "payroll", ":payrollId", "payslip"],
+              "variable": [
+                {
+                  "key": "payrollId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Export Bank Transfer CSV",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/payroll/export/csv?tenantId=:tenantId&month=1&year=2024",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "payroll", "export", "csv"],
+              "query": [
+                {
+                  "key": "tenantId",
+                  "value": "{{tenantId}}"
+                },
+                {
+                  "key": "month",
+                  "value": "1"
+                },
+                {
+                  "key": "year",
+                  "value": "2024"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Audit Logs",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/payroll/:payrollId/audit",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "payroll", ":payrollId", "audit"],
+              "variable": [
+                {
+                  "key": "payrollId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Payroll processing, approval, and export"
+    },
+    {
+      "name": "07. Health",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/{{apiPath}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["{{apiPath}}", "health"]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Health check endpoints"
+    }
+  ]
+}
