@@ -1,0 +1,74 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: payrolltax-postgres
+    environment:
+      POSTGRES_DB: payrolltax
+      POSTGRES_USER: payrolluser
+      POSTGRES_PASSWORD: payrollpass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U payrolluser -d payrolltax"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - payrolltax-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: payrolltax-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - payrolltax-network
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: payrolltax-api
+    ports:
+      - "8081:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/payrolltax
+      SPRING_DATASOURCE_USERNAME: payrolluser
+      SPRING_DATASOURCE_PASSWORD: payrollpass
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+      JWT_SECRET: 5Z4x8K2mP9qL3vR6tY1wN7bC0dF4gHjK8mNpQrStUvWxYzA2bC5eD8fG1hI4jK7lM0nP
+      SPRING_PROFILES_ACTIVE: production
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 90s
+    networks:
+      - payrolltax-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  payrolltax-network:
+    driver: bridge
